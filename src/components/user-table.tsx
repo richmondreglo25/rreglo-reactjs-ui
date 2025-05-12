@@ -1,17 +1,13 @@
-import React from 'react'
-import { getUsers } from '@api/users';
+"use client";
+import React from 'react';
+import { User } from '@types';
 
-interface User {
-    id: number,
-    status: boolean,
-    firstname: string,
-    lastname: string,
-    createdAt: string,
-    updatedAt: string
+interface Props {
+    users: User[]
 }
 
-const UsersTable = async () => {
-    const users: User[] = await getUsers();
+const UsersTable = (props: Props) => {
+
     const headers = [{
         name: 'firstName',
         label: 'First Name'
@@ -60,7 +56,7 @@ const UsersTable = async () => {
                     </thead>
                     <tbody>
                         {
-                            users.map(
+                            props.users.map(
                                 user => <tr key={user.id}>
                                     <td>{user.firstname}</td>
                                     <td>{user.lastname}</td>
