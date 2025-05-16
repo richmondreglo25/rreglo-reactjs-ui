@@ -1,4 +1,11 @@
-export const getErrorMessage = (data: any, status: number) => {
+export const getSuccessMsg = (status: number) => {
+    return {
+        success: true,
+        status: status | 200
+    }
+}
+
+export const getErrorMsg = (data: any, status: number) => {
     const genericErrMsg = 'Something went wrong.';
 
     if (status >= 500) {
@@ -12,7 +19,6 @@ export const getErrorMessage = (data: any, status: number) => {
         return data?.message;
     }
 }
-
 
 export const throwErrorMsg = (value: any) => {
     if (typeof value === 'object' && value !== null) {

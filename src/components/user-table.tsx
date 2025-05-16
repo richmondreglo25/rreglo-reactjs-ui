@@ -1,12 +1,27 @@
 "use client";
-import React from 'react';
+import React, { useState } from 'react';
 import { User } from '@types';
+import EditUserModal from '@app/(app)/(users)/_feature/edit-user/edit-user-modal';
 
 interface Props {
     users: User[]
 }
 
 const UsersTable = (props: Props) => {
+
+    // States
+
+    const [id, setId] = useState('');
+    const [openEditUserModal, setOpenEditUserModal] = useState(false);
+
+    const handleOpenEditUserModal = (id: string) => {
+        setId(id);
+        setOpenEditUserModal(true)
+    };
+
+    const handleCloseEditUserModal = () => setOpenEditUserModal(false);
+
+    // Table settings
 
     const headers = [{
         name: 'firstName',
@@ -43,6 +58,7 @@ const UsersTable = (props: Props) => {
 
     return (
         <>
+            {openEditUserModal && <EditUserModal id={id} handleCancel={handleCloseEditUserModal} />}
             <div className='overflow-x-auto rounded-box border border-base-content/5 bg-base-100'>
                 <table className='table table-zebra'>
                     <thead>
@@ -63,6 +79,9 @@ const UsersTable = (props: Props) => {
                                     {statusRenderer(user.status)}
                                     <td>{user.createdAt}</td>
                                     <td>{user.updatedAt}</td>
+                                    <td>
+                                        <button className="btn btn-xs btn-primary" onClick={() => handleOpenEditUserModal(user.id)}>Edit</button>
+                                    </td>
                                 </tr>
                             )
                         }

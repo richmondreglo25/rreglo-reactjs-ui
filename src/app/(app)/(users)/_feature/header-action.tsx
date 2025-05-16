@@ -1,20 +1,20 @@
 "use client";
 import React, { useState } from 'react';
-import AddUserFormModal from './add-user/add-user-form-modal';
+import AddUserModal from './add-user/add-user-modal';
 
 export default function HeaderAction() {
-    const [openAddUserForm, setOpenAddUserform] = useState(false);
+    const [openAddUserModal, setOpenAddUserModal] = useState(false);
 
-    const handleOpenAddUserForm = () => setOpenAddUserform(true);
-    const handleCloseAddUserForm = () => setOpenAddUserform(false);
+    const handleOpenAddUserModal = () => setOpenAddUserModal(true);
+    const handleCloseAddUserModal = () => setOpenAddUserModal(false);
 
     return (
         <>
             <div className='flex justify-end w-full mb-5'>
-                <button className="btn btn-md btn-primary" onClick={handleOpenAddUserForm}>Add</button>
+                <button className="btn btn-md btn-primary" onClick={handleOpenAddUserModal}>Add</button>
             </div>
 
-            {openAddUserForm && <AddUserFormModal handleCancel={handleCloseAddUserForm} />}
+            {openAddUserModal && <AddUserModal handleCancel={handleCloseAddUserModal} />}
         </>
     )
 }

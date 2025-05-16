@@ -11,7 +11,7 @@ const defaultProps = {
     handleCancel: () => console.log('Cancelled!')
 }
 
-const ConfirmationModal = (props: Props) => {
+const AddUserModal = (props: Props) => {
     props = {
         ...defaultProps,
         ...props
@@ -28,24 +28,19 @@ const ConfirmationModal = (props: Props) => {
 
     // Events
 
-    const handleKeyDown = async (event: Event) => {
+    const handleKeyDown = async (event: { target: any; }) => {
         const target = event.target;
         const fieldName = target?.name;
         const value = target?.value;
-
-        console.log(fieldName);
 
         if (validateField(fieldName, value)) {
             setErrorMessage('');
         }
     }
 
-    const validateField = (fieldName: string, value: any) => {
-        return true;
-    }
-
     const handleSubmit = async (formData: any) => {
-        const result = await addUser(formData);
+        const formValues = Object.fromEntries(formData);
+        const result = await addUser(formValues);
 
         if (result.error) {
             setErrorMessage(result.error);
@@ -53,6 +48,12 @@ const ConfirmationModal = (props: Props) => {
         else {
             props.handleCancel();
         }
+    }
+
+    // Validators
+
+    const validateField = (fieldName: string, value: any) => {
+        return true;
     }
 
     return (
@@ -69,4 +70,4 @@ const ConfirmationModal = (props: Props) => {
     )
 }
 
-export default ConfirmationModal
+export default AddUserModal

@@ -1,5 +1,5 @@
 'use client';
-import React, { ReactNode, useState } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import Modal from './modal';
 
 interface Props {
@@ -50,7 +50,7 @@ const FormModal = (props: Props) => {
             <form id='modal-body' autoComplete='false' action={_handleSubmit} className='flex flex-col'>
                 <div id='modal-header' className='px-5 py-3.5 border-b border-gray-200'>
                     <h3 id='modal-title' className='text-base font-semibold text-gray-900'>{props.title}</h3>
-                    <button onClick={props.handleCancel} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                    <button type="button" onClick={props.handleCancel} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                 </div>
                 <div className='flex-1 bg-white px-5 pt-2 pb-5'>
                     {props.children}
@@ -62,12 +62,12 @@ const FormModal = (props: Props) => {
                 </div>
                 <div id='modal-footer' className='flex flex-row-reverse px-5 py-3.5 border-t border-gray-200'>
                     {props.errorMessage &&
-                        <button type='submit' className='btn btn-primary ml-2' disabled>{props.submitLabel}</button>
+                        <button className='btn btn-primary ml-2' disabled>{props.submitLabel}</button>
                     }
                     {!props.errorMessage &&
                         <button type='submit' className='btn btn-primary ml-2'>{props.submitLabel} {formSubmitting && <span> ...</span>}</button>
                     }
-                    <button onClick={props.handleCancel} className='btn btn-default'>{props.cancelLabel}</button>
+                    <button type="button" onClick={props.handleCancel} className='btn btn-default'>{props.cancelLabel}</button>
                 </div>
             </form>
         </Modal>
